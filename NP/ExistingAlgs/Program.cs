@@ -12,16 +12,6 @@ namespace ryukzak
         private static int _enteredWeight, _enteredPrice, _bagMaxWeight; // Вес и цена товара, размер рюкзака
 
 
-        // Метод выводит на экран рюкзак
-        static void Print(Good[] goods)
-        {
-            Console.WriteLine("\nМаксимальная стоимость: " + BellmanAlg.func[_bagMaxWeight, _goodsCount - 1]);
-            Console.Write("Взяты следующие предметы: ");
-            foreach (Good good in goods)
-                if (good.Take)
-                    Console.Write(good.Name + " ");
-        }
-
         static void Main(string[] args)
         {
             int i, j; //просто переменные :)
@@ -98,9 +88,22 @@ namespace ryukzak
                 }
             } while (incorrEnter);
 
-            Print(goods);
+            BellmanAlg alg = new BellmanAlg(_bagMaxWeight, _goodsCount);
+            alg.Calc(goods);
+
+            Print(goods, alg.MaxValueGoodSet);
 
             Console.ReadKey();
+        }
+
+        // Метод выводит на экран рюкзак
+        static void Print(Good[] goods, int maxValueGoodSet)
+        {
+            Console.WriteLine("\nМаксимальная стоимость: " + maxValueGoodSet);
+            Console.Write("Взяты следующие предметы: ");
+            foreach (Good good in goods)
+                if (good.IsTaken)
+                    Console.Write(good.Name + " ");
         }
     }
 }

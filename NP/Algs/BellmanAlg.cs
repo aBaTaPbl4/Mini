@@ -16,6 +16,12 @@ namespace ExistingAlgs
             _goodsCount = goodsCount;
         }
 
+        public int MaxValueGoodSet
+        {
+            get { return _matrix[_maxWeight, _goodsCount - 1]; }
+        }
+
+
         public void Calc(Good[] goods)
         {
             _matrix = new int[_maxWeight + 1, _goodsCount]; //Реализуем массив функции
@@ -27,17 +33,17 @@ namespace ExistingAlgs
                     if (goods[i].Weight > weight)
                     {
                         _matrix[weight, i] = _matrix[weight, i - 1]; //тогда берем предыдущий набор
-                        goods[i].Take = false;
+                        goods[i].IsTaken = false;
                     }
                     else if (_matrix[weight, i - 1] >= (_matrix[weight - goods[i].Weight, i - 1] + goods[i].Price))
                     {
                         _matrix[weight, i] = _matrix[weight, i - 1]; //тогда берем предыдущий набор
-                        goods[i].Take = false;
+                        goods[i].IsTaken = false;
                     }
                     else
                     {
                         _matrix[weight, i] = _matrix[weight - goods[i].Weight, i - 1] + goods[i].Price; //иначе добавляем к предыдущему набору текущий предмет
-                        goods[i].Take = true;
+                        goods[i].IsTaken = true;
                     }
         }
     }
