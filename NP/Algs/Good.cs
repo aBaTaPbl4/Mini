@@ -13,11 +13,8 @@ namespace Algs
         public int Price { get; set; } //цена товара
         public bool IsTaken { get; set; } //берем ли товар
 
-        public Good(string n, int w, int p)
+        public Good()
         {
-            Name = n;
-            Weight = w;
-            Price = p;
         }
     }
 }

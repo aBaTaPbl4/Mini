@@ -17,6 +17,11 @@ namespace UnitTests
         public void Test1()
         {
             var goods = new Good[9];
+            for (int i = 0; i < 9; i++)
+            {
+                goods[i] = new Good();
+            }
+
             goods[0].Name = "36";
             goods[0].Weight = 36;
             goods[0].Price = 68;
@@ -54,7 +59,7 @@ namespace UnitTests
             goods[8].Weight = 67;
             goods[8].Price = 70;
 
-            var alg = new BellmanAlg(100, 10);
+            var alg = new BellmanAlg(100, 9);
             alg.Calc(goods);
             StringBuilder sb = new StringBuilder();
             foreach (var good in goods)
