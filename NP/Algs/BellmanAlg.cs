@@ -1,4 +1,5 @@
-﻿using Algs;
+﻿using System.Linq;
+using Algs;
 
 
 namespace ExistingAlgs
@@ -8,6 +9,7 @@ namespace ExistingAlgs
         private readonly int _maxWeight;
         private readonly int _goodsCount;
         private static int[,] _matrix; //массив для хранения значений функции
+        private Good[] _goods;
 
 
         public BellmanAlg(int maxWeight, int goodsCount)
@@ -16,14 +18,9 @@ namespace ExistingAlgs
             _goodsCount = goodsCount;
         }
 
-        public int MaxValueGoodSet
-        {
-            get { return _matrix[_maxWeight, _goodsCount - 1]; }
-        }
-
-
         public void Calc(Good[] goods)
         {
+            _goods = goods;
             _matrix = new int[_maxWeight + 1, _goodsCount]; //Реализуем массив функции
 
             //Реализуем алгоритм Беллмана
@@ -45,6 +42,21 @@ namespace ExistingAlgs
                         _matrix[weight, i] = _matrix[weight - goods[i].Weight, i - 1] + goods[i].Price; //иначе добавляем к предыдущему набору текущий предмет
                         goods[i].IsTaken = true;
                     }
+        }
+
+        public GoodsPack BestPriceGoodsPack
+        {
+            get
+            {
+                if (_goods == null)
+                {
+                    return new GoodsPack();
+                }
+                var pack = new GoodsPack();
+                var takenGoods = _goods.Where(g => g.IsTaken);
+                pack.AddRange(takenGoods);
+                return pack;
+            }
         }
     }
 }

@@ -20,21 +20,9 @@ namespace UnitTests
         {
             var goods = Create9GoodsArray();
 
-            var alg = new BellmanAlg(100, 5);
+            var alg = new BellmanAlg(100, 4);
             alg.Calc(goods);
-            StringBuilder sb = new StringBuilder();
-            int weightTotal = 0;
-            foreach (var good in goods)
-            {
-                if (good.IsTaken)
-                {
-                    weightTotal += good.Weight;
-                    sb.AppendFormat(" {0} (Value:{1}) + ", good.Weight, good.Price);
-                }
-            }
-            string result = sb.ToString(0, sb.Length - 2);
-            string msg = string.Format("{0} = {1} ( {2} )", result, weightTotal, alg.MaxValueGoodSet);
-            Console.WriteLine(msg);
+            _printer.PrintPack(alg.BestPriceGoodsPack);
         }
 
 
@@ -64,6 +52,34 @@ namespace UnitTests
             Assert.IsTrue(alg.BestPriceGoodsPack.ContainsGoodWithName("7"));
             Assert.IsTrue(alg.BestPriceGoodsPack.ContainsGoodWithName("1"));
             _printer.PrintPackShort(alg.UnbestPacks);
+        }
+
+
+        [Test]
+        public void MuAlgTest_With3Goods()
+        {
+            int bagMaxWeight = 80;
+            var alg = new MuAlg(bagMaxWeight);
+            Good[] goods = Create3GoodsArray();
+            alg.Calc(goods);
+            Assert.AreEqual(190, alg.BestPriceGoodsPack.Price);
+            Assert.IsTrue(alg.BestPriceGoodsPack.ContainsGoodWithName("2"));
+            Assert.IsTrue(alg.BestPriceGoodsPack.ContainsGoodWithName("3"));
+            _printer.PrintPack(alg.BestPriceGoodsPack);
+        }
+
+        [Test]
+        public void MuAlgTest_With9Goods()
+        {
+            int bagMaxWeight = 100;
+            var alg = new MuAlg(bagMaxWeight);
+            Good[] goods = Create9GoodsArray();
+            alg.Calc(goods);
+            _printer.PrintPack(alg.BestPriceGoodsPack);
+            Assert.AreEqual(193, alg.BestPriceGoodsPack.Price);
+            Assert.IsTrue(alg.BestPriceGoodsPack.ContainsGoodWithName("5"));
+            Assert.IsTrue(alg.BestPriceGoodsPack.ContainsGoodWithName("7"));
+            Assert.IsTrue(alg.BestPriceGoodsPack.ContainsGoodWithName("1"));
         }
 
 

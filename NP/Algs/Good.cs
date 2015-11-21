@@ -20,6 +20,10 @@ namespace Algs
         public int Price { get; set; } //цена товара
         public bool IsTaken { get; set; } //берем ли товар
 
+
+        public int DeltaWeight { get; set; }
+        public int Index { get; set; }
+
         public Good(string name)
         {
             _name = name;

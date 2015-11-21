@@ -29,7 +29,6 @@ namespace Algs
             int priceTotal = 0;
             string idLine = "";
             int errorCount = 0;
-            int maxPrice;
 
             startLoop:
             bag.Clear();
@@ -95,8 +94,7 @@ namespace Algs
                 pack.AddRange(bag);
                 _goodsPacks.Add(pack);
                 prices.Add(Convert.ToString(priceTotal) + ";" + idLine);
-            }
-                
+            }                
             else
             {
                 errorCount++;
@@ -105,22 +103,6 @@ namespace Algs
             goto startLoop;
 
             countingPrice:
-            // находим максимальную сумму коллекции из собранных вариантов 
-            maxPrice = 0;
-            string idBufer = "";
-            foreach (string i in prices)
-            {
-                string[] bufer = i.Split(';');
-                price = Convert.ToInt32(bufer[0]);
-                idLine = bufer[1];
-
-                if (price > maxPrice)
-                {
-                    maxPrice = price;
-                    idBufer = idLine;
-                }
-            }
-
             var maximumPrice = _goodsPacks.Max(p => p.Price);
             BestPriceGoodsPack = _goodsPacks.First(p => p.Price == maximumPrice);
             BestPriceGoodsPack.SetTaken();

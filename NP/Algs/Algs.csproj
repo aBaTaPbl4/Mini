@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BellmanAlg.cs" />
+    <Compile Include="ExtensionMethods.cs" />
     <Compile Include="FullEnumerationAlg.cs" />
     <Compile Include="Good.cs" />
     <Compile Include="GoodsPack.cs" />
