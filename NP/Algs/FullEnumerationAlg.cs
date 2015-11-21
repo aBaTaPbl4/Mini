@@ -17,8 +17,7 @@ namespace Algs
 
         public void Calc(Good[] goods)
         {
-            string id;
-            int weight, price;
+            int price;
             List<Good> bag = new List<Good>(); // это рюкзак 
             List<string> ids = new List<string>(); // буфер id 
             List<string> prices = new List<string>(); // список цен коллекций 
@@ -70,9 +69,6 @@ namespace Algs
             // подсчет общей цены коллекции 
             foreach (Good item in bag)
             {
-
-                id = item.Name;
-                weight = item.Weight;
                 price = item.Price;
 
                 ids.Add(item.Name);
