@@ -43,6 +43,9 @@
     <Compile Include="BellmanAlg.cs" />
     <Compile Include="FullEnumerationAlg.cs" />
     <Compile Include="Good.cs" />
+    <Compile Include="GoodsPack.cs" />
+    <Compile Include="MuAlg.cs" />
+    <Compile Include="PackPrinter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

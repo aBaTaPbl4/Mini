@@ -54,5 +54,10 @@ namespace Algs
         {
             return Name.GetHashCode();
         }
+
+        public override string ToString()
+        {
+            return $"{Name}(W:{Weight},P:{Price})";
+        }
     }
 }

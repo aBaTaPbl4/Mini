@@ -9,17 +9,19 @@ namespace Algs
     public class FullEnumerationAlg
     {
         private readonly int _bagMaxWeight;
+        private readonly List<GoodsPack> _goodsPacks;
 
         public FullEnumerationAlg(int bagMaxWeight)
         {
             _bagMaxWeight = bagMaxWeight;
+            _goodsPacks = new List<GoodsPack>();
         }
 
         public void Calc(Good[] goods)
         {
             int price;
             List<Good> bag = new List<Good>(); // это рюкзак 
-            List<string> ids = new List<string>(); // буфер id 
+            List<string> goodNames = new List<string>(); // буфер id 
             List<string> prices = new List<string>(); // список цен коллекций 
             Random random = new Random();
             Good good;
@@ -64,28 +66,37 @@ namespace Algs
                 }
             }
 
-            ids.Clear();
+            goodNames.Clear();
             priceTotal = 0;
             // подсчет общей цены коллекции 
             foreach (Good item in bag)
             {
                 price = item.Price;
-
-                ids.Add(item.Name);
+                goodNames.Add(item.Name);
                 priceTotal += price;
             }
+
 
             // сбор id в строку 
             idLine = "";
             int count = 0;
-            foreach (string i in ids)
+            foreach (string i in goodNames)
             {
-                if (count != (ids.Count - 1)) idLine += i + ",";
-                else idLine += i;
+                if (count != (goodNames.Count - 1))
+                    idLine += i + ",";
+                else
+                    idLine += i;
                 count++;
             }
 
-            if (!prices.Contains(Convert.ToString(priceTotal) + ";" + idLine)) prices.Add(Convert.ToString(priceTotal) + ";" + idLine);
+            if (!prices.Contains(Convert.ToString(priceTotal) + ";" + idLine))
+            {
+                var pack = new GoodsPack();
+                pack.AddRange(bag);
+                _goodsPacks.Add(pack);
+                prices.Add(Convert.ToString(priceTotal) + ";" + idLine);
+            }
+                
             else
             {
                 errorCount++;
@@ -110,19 +121,18 @@ namespace Algs
                 }
             }
 
-            Console.WriteLine("Most expensive pack from Knapsack:\ncost: {0} id: {1}", maxPrice, idBufer);
-            Console.WriteLine("\nAnother variants of pack:");
-            foreach (string i in prices)
-            {
-                if (!i.Contains(Convert.ToString(maxPrice))) Console.WriteLine(i);
-            }
-
-            TotalPrice = maxPrice;
-            Ids = idBufer;
+            var maximumPrice = _goodsPacks.Max(p => p.Price);
+            BestPriceGoodsPack = _goodsPacks.First(p => p.Price == maximumPrice);
+            BestPriceGoodsPack.SetTaken();
         }
 
-        public int TotalPrice { get; private set; }
 
-        public string Ids { get; private set; }
+        public GoodsPack BestPriceGoodsPack { get; private set; }
+
+        public GoodsPack[] UnbestPacks
+        {
+            get { return _goodsPacks.Where(p => p.Price != BestPriceGoodsPack.Price).ToArray(); }
+        }
+
     }
 }
