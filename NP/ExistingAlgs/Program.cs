@@ -11,8 +11,17 @@ namespace ryukzak
         private static string _enteredName; // Имя товара
         private static int _enteredWeight, _enteredPrice, _bagMaxWeight; // Вес и цена товара, размер рюкзака
 
-
         static void Main(string[] args)
+        {
+            
+        }
+
+        static void MainFullEnumerationAlg(string[] args)
+        {
+            
+        }
+
+        static void MainBellmanAlg(string[] args)
         {
             int i, j; //просто переменные :)
 
@@ -69,7 +78,10 @@ namespace ryukzak
                         _enteredPrice = 0;
                     }
                 } while (incorrEnter);
-                goods[i] = new Good(_enteredName, _enteredWeight, _enteredPrice); //Создаем объект
+                var good = new Good(_enteredName); //Создаем объект
+                good.Weight = _enteredWeight;
+                good.Price = _enteredPrice;
+                goods[i] = good;
             }
 
             // Введем размер рюкзака
