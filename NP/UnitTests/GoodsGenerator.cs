@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Markup;
 using Algs;
 
 namespace UnitTests
@@ -23,5 +24,21 @@ namespace UnitTests
             return goods;
         }
 
+        internal Good[] GenerateGoods(string elementsStringRepresentation)
+        {
+            string[] strElements = elementsStringRepresentation.Split('|');
+            List<Good> goods = new List<Good>(strElements.Length);
+            int i = 0;
+            foreach (var strElement in strElements)
+            {
+                i++;
+                var values = strElement.Split(':');
+                var good = new Good(i.ToString());
+                good.Price = int.Parse(values[0]);
+                good.Weight = int.Parse(values[1]);
+                goods.Add(good);
+            }
+            return goods.ToArray();
+        }
     }
 }

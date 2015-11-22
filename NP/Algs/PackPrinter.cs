@@ -46,9 +46,9 @@ namespace Algs
             var sb = new StringBuilder();
             foreach (var good in goods)
             {
-                sb.AppendFormat("{0}:{1}{2}", good.Price, good.Weight, Environment.NewLine);
+                sb.AppendFormat("{0}:{1}{2}", good.Price, good.Weight, "|");
             }
-            Console.Write(sb.ToString());
+            Console.Write(sb.ToString(0, sb.Length - 1));
         }
     }
 }

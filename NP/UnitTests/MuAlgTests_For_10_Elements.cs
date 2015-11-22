@@ -36,5 +36,16 @@ namespace UnitTests
             }
             Assert.Pass("ok");
         }
+
+        [TestCase(37, @"76:15|52:32|40:77|163:58|84:35|81:65|12:20|49:7|57:90|128:111")]
+        public void FailedCaseTest(int bagCapacity, string elements )
+        {
+            var fuAlg = new FullEnumerationAlg(bagCapacity);
+            var muAlg = new MuAlg(bagCapacity);
+            Good[] goods = _goodsGenerator.GenerateGoods(elements);
+            fuAlg.Calc(goods);
+            muAlg.Calc(goods);
+            Assert.AreEqual(fuAlg.BestPriceGoodsPack, muAlg.BestPriceGoodsPack);
+        }
     }
 }
