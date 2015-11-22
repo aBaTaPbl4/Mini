@@ -39,7 +39,7 @@ namespace Algs
 
                 //алгоритм выбора элемента для замены:
                 
-                var firstOutOfGroupElement = goodsByPrice.ElementAtSafe(groupRang + 1);
+                var firstOutOfGroupElement = goodsByPrice.ElementAtSafe(groupRang);
                 if (firstOutOfGroupElement == null)
                 {
                     bestPacks.Add(groupRang, new GoodsPack());
