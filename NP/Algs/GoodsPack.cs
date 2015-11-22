@@ -34,6 +34,11 @@ namespace Algs
             }
         }
 
+        public int Count
+        {
+            get { return _pack.Count;}
+        }
+
         public Good[] Goods
         {
             get { return _pack.ToArray(); }
@@ -71,6 +76,28 @@ namespace Algs
         IEnumerator IEnumerable.GetEnumerator()
         {
             return _pack.GetEnumerator();
+        }
+
+        public override bool Equals(object obj)
+        {
+            GoodsPack goodsPack = obj as GoodsPack;
+            if (goodsPack == null)
+            {
+                return false;
+            }
+
+            if (goodsPack.Count != Count)
+            {
+                return false;
+            }
+            foreach (Good item in goodsPack)
+            {
+                if (!_pack.Contains(item))
+                {
+                    return false;
+                }
+            }
+            return true;
         }
     }
 }

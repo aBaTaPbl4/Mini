@@ -44,6 +44,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GoodsGenerator.cs" />
+    <Compile Include="MuAlgTests_For_10_Elements.cs" />
     <Compile Include="AlgTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

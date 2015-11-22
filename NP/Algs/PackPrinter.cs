@@ -40,5 +40,15 @@ namespace Algs
                 PrintPackShort(unbestPack);
             }
         }
+
+        public void PrintGoods(Good[] goods)
+        {
+            var sb = new StringBuilder();
+            foreach (var good in goods)
+            {
+                sb.AppendFormat("{0}:{1}{2}", good.Price, good.Weight, Environment.NewLine);
+            }
+            Console.Write(sb.ToString());
+        }
     }
 }
