@@ -103,15 +103,15 @@ namespace ryukzak
             BellmanAlg alg = new BellmanAlg(_bagMaxWeight, _goodsCount);
             alg.Calc(goods);
 
-            Print(goods, alg.MaxValueGoodSet);
+            Print(goods, alg.BestPriceGoodsPack.Price);
 
             Console.ReadKey();
         }
 
         // Метод выводит на экран рюкзак
-        static void Print(Good[] goods, int maxValueGoodSet)
+        static void Print(Good[] goods, int maxPriceForGoodsPack)
         {
-            Console.WriteLine("\nМаксимальная стоимость: " + maxValueGoodSet);
+            Console.WriteLine("\nМаксимальная стоимость: " + maxPriceForGoodsPack);
             Console.Write("Взяты следующие предметы: ");
             foreach (Good good in goods)
                 if (good.IsTaken)

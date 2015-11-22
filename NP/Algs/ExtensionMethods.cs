@@ -12,7 +12,7 @@ namespace Algs
         {
             if (source.Count() >= index)
             {
-                return default;
+                return default(TSource);
             }
             return source.ElementAt(index);
         }
