@@ -13,6 +13,8 @@ namespace UnitTests
     {        
         GoodsGenerator _goodsGenerator = new GoodsGenerator();
         PackPrinter _printer = new PackPrinter();
+
+
         [Test]
         public void Test([Random(1, 100, 1000)] int bagCapacity)
         {
