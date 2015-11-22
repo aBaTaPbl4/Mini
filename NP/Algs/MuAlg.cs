@@ -65,6 +65,10 @@ namespace Algs
             BestPriceGoodsPack = packs.First(p => p.Price == maxPackPrice);
         }
 
+
+
+        //Вычисляем дельту весов и дельту цены по каждой парах  [ElementInGroup(i) - firstOutOfGroupElement], firstOutOfGroupElement - secondOutOfGroupElement
+        //Выбираем мин дельту цены, такую что дельта весов > 0 (вес уменьшится);
         private GoodsPack CalcBestPackAlg(IOrderedEnumerable<Good> goodsByPrice, Good[] mostExpensiveGoods, Good firstOutOfGroupElement)
         {
             //Решаем переходить к следующему внегрупповому элементу или делать подстановку с целью уменьшения веса группы. 
@@ -164,6 +168,7 @@ namespace Algs
             var goodsByWeightDesc =  goodsByWeightAsc.Reverse();
             enumerator = goodsByWeightDesc.GetEnumerator();
             //calc min elements count
+            totalWeight = 0;
             while (enumerator.MoveNext())
             {
                 if (totalWeight + enumerator.Current.Weight > _bagMaxWeight)

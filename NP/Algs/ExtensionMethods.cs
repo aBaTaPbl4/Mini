@@ -10,7 +10,7 @@ namespace Algs
     {
         public static TSource ElementAtSafe<TSource>(this IEnumerable<TSource> source, int index)
         {
-            if (source.Count() >= index)
+            if (  index < 0 || source.Count() <= index)
             {
                 return default(TSource);
             }
